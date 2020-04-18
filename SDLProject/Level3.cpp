@@ -10,9 +10,9 @@ unsigned int level3_data[] =
     3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     3, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0,
-    3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
-    3, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 2, 2,
-    3, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2
+    3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 1,
+    3, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 3, 2,
+    3, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 3, 2
 };
 
 void Level3::Initialize() {
@@ -45,21 +45,82 @@ void Level3::Initialize() {
     state.player->jumpPower = 7.0f;
     
     state.enemies = new Entity[LEVEL3_ENEMY_COUNT];
-    GLuint enemyTextureID = Util::LoadTexture("ctg.png");
+    GLuint enemyTextureID = Util::LoadTexture("enemy2.png");
     
     state.enemies[0].entityType = ENEMY;
-    state.enemies[0].aiType = WAITANDGO;
-    state.enemies[0].aiState = IDLE;
+    state.enemies[0].aiType = WALKER;
+    state.enemies[0].aiState = WALKING;
     state.enemies[0].textureID = enemyTextureID;
-    state.enemies[0].position = glm::vec3(4, -2.25, 0);
+    state.enemies[0].position = glm::vec3(1, -5, 0);
     state.enemies[0].speed = 1;
-    state.enemies[0].isActive = false;
+    state.enemies[0].movement = glm::vec3(1, 0, 0);
+    state.enemies[0].isActive = true;
+    
+    state.gameOver = new Entity[9];
+    state.youWin = new Entity[7];
+    float counter = 3.0f;
+    
+    GLuint fontTextureID = Util::LoadTexture("font1.png");
+    
+    for (int i = 0; i < 9; i++){
+        state.gameOver[i].textureID = fontTextureID;
+        state.gameOver[i].position = glm::vec3(counter, -2, 0);
+        state.gameOver[i].animCols = 16;
+        state.gameOver[i].animRows = 16;
+        state.gameOver[i].height = 0.3f;
+        state.gameOver[i].width = 0.3f;
+        state.gameOver[i].fail = new int[9] {71, 65, 77, 69, 9, 79, 86, 69, 82};
+        state.gameOver[i].index = i;
+        state.gameOver[i].isActive = false;
+        if (i < 7){
+            state.youWin[i].textureID = fontTextureID;
+            state.youWin[i].position = glm::vec3(counter + 6, -2, 0);
+            state.youWin[i].animCols = 16;
+            state.youWin[i].animRows = 16;
+            state.youWin[i].height = 0.3f;
+            state.youWin[i].width = 0.3f;
+            state.youWin[i].success = new int[7] {89, 79, 85, 9, 87, 73, 78};
+            state.youWin[i].index = i;
+            state.youWin[i].isActive = false;
+        }
+        counter += 0.5f;
+    }
+    
+    for (int j = 0; j < 9; j++){
+        state.gameOver[j].Update(NULL, NULL, NULL, 0, state.map);
+    }
+    for (int j = 0; j < 7; j++){
+        state.youWin[j].Update(NULL, NULL, NULL, 0, state.map);
+    }
 }
 void Level3::Update(float deltaTime) {
     state.player->Update(deltaTime, state.player, state.enemies, LEVEL3_ENEMY_COUNT, state.map);
+    state.enemies[0].Update(deltaTime, state.player, NULL, 0, state.map);
+    
+    if (state.player->lives == 0){
+        state.player->isActive = false;
+        for ( int i = 0; i < 9; i++){
+            state.gameOver[i].isActive = true;
+            state.gameOver[i].Update(NULL, NULL, NULL, 0, state.map);
+        }
+    }
+    if (state.player->position.x >= 12){
+        state.player->isActive = false;
+        for ( int i = 0; i < 7; i++){
+            state.youWin[i].isActive = true;
+            state.youWin[i].Update(NULL, NULL, NULL, 0, state.map);
+        }
+    }
 }
 
 void Level3::Render(ShaderProgram *program) {
     state.map->Render(program);
+    state.enemies[0].Render(program);
     state.player->Render(program);
+    for ( int i = 0; i < 9; i++){
+        state.gameOver[i].Render(program);
+    }
+    for ( int i = 0; i < 7; i++){
+        state.youWin[i].Render(program);
+    }
 }

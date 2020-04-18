@@ -36,7 +36,9 @@ void Entity::CheckCollisionsY(Entity *objects, int objectCount)
                 velocity.y = 0;
                 collidedTop = true;
                 if (this->entityType == PLAYER && object->entityType == ENEMY){
-                    this->isActive = false;
+                    this->position = glm::vec3(5, 0, 0);
+                    //this->isActive = false;
+                    this->lives -= 1;
                 }
             }
             else if (velocity.y < 0) {
@@ -65,15 +67,20 @@ void Entity::CheckCollisionsX(Entity *objects, int objectCount)
                 velocity.x = 0;
                 collidedRight = true;
                 if (this->entityType == PLAYER && object->entityType == ENEMY){
-                    this->isActive = false;
+                    this->position = glm::vec3(5, 0, 0);
+                    //this->isActive = false;
+                    this->lives -= 1;
                 }
+
             }
             else if (velocity.x < 0) {
                 position.x += penetrationX;
                 velocity.x = 0;
                 collidedLeft = true;
                 if (this->entityType == PLAYER && object->entityType == ENEMY){
-                    this->isActive = false;
+                    this->position = glm::vec3(5, 0, 0);
+                    //this->isActive = false;
+                    this->lives -= 1;
                 }
             }
         }
@@ -142,8 +149,17 @@ void Entity::CheckCollisionsX(Map *map)
     }
     
 }
-void Entity:: AIWalker(){
-    movement = glm::vec3(-1, 0, 0);
+
+void Entity:: AIWalker(int x){
+    if (x < 0 && position.x <= 1.0){
+        movement = glm::vec3(1, 0, 0);
+    }
+    else if (x > 0 && position.x >= 6.0){
+        movement = glm::vec3(-1, 0, 0);
+    }
+    else{
+        movement = glm::vec3(x, 0, 0);
+    }
 }
 
 void Entity::AIWaitAndGo(Entity *player){
@@ -170,7 +186,7 @@ void Entity::AIWaitAndGo(Entity *player){
 void Entity::AI(Entity *player){
     switch (aiType) {
         case WALKER:
-            AIWalker();
+            AIWalker(movement.x);
             break;
         case WAITANDGO:
             AIWaitAndGo(player);
@@ -264,12 +280,13 @@ void Entity::Render(ShaderProgram *program) {
         DrawSpriteFromTextureAtlas(program, textureID, animIndices[animIndex]);
         return;
     }
-    if (row1 != NULL) {
-        DrawSpriteFromTextureAtlas(program, textureID, row1[index]);
+    
+    if (success != NULL) {
+        DrawSpriteFromTextureAtlas(program, textureID, success[index]);
     }
     
-    if (row2 != NULL) {
-        DrawSpriteFromTextureAtlas(program, textureID, row2[index]);
+    if (fail != NULL) {
+        DrawSpriteFromTextureAtlas(program, textureID, fail[index]);
     }
     
     float vertices[]  = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };

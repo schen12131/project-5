@@ -30,19 +30,21 @@ public:
     
     float height = 1;
     float width = 1;
+    int lives = 3;
+    
     
     float speed;
     
     bool jump = false;
     float jumpPower = 0;
     
+    int *success = NULL;
+    int *fail = NULL;
+    int index;
+    
     GLuint textureID;
     
     glm::mat4 modelMatrix;
-    
-    int *row1 = NULL;
-    int *row2 = NULL;
-    int index;
     
     int *animRight = NULL;
     int *animLeft = NULL;
@@ -74,6 +76,6 @@ public:
     void Render(ShaderProgram *program);
     void DrawSpriteFromTextureAtlas(ShaderProgram *program, GLuint textureID, int index);
     void AI(Entity *player);
-    void AIWalker();
+    void AIWalker(int x);
     void AIWaitAndGo(Entity *player);
 };

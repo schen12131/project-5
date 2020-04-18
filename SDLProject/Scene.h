@@ -18,11 +18,14 @@ struct GameState {
     Map *map;
     Entity *player;
     Entity *enemies;
-    Entity *words;
+    Entity *gameOver;
+    Entity *youWin;
     int nextScene;
+    
 };
 class Scene {
 public:
+    int lives;
     GameState state;
     virtual void Initialize() = 0;
     virtual void Update(float deltaTime) = 0;

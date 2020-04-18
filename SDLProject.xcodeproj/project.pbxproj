@@ -7,18 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A06F6C6244AD6ED00772789 /* crypto.mp3 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A06F6C5244AD6DC00772789 /* crypto.mp3 */; };
+		3A06F6CA244AD88400772789 /* gameover.wav in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A06F6C9244AD88000772789 /* gameover.wav */; };
+		3A06F6CE244ADCAC00772789 /* enemy2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A06F6CB244ADC6600772789 /* enemy2.png */; };
 		3A44F4E0243E92E7002B80F8 /* tileset.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A44F4DF243E92D5002B80F8 /* tileset.png */; };
 		3A44F4E3243E9376002B80F8 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A44F4E1243E9376002B80F8 /* Map.cpp */; };
 		3A44F4E6243E9C4B002B80F8 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A44F4E4243E9C4B002B80F8 /* Util.cpp */; };
 		3A44F4E9243E9EA8002B80F8 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A44F4E7243E9EA8002B80F8 /* Scene.cpp */; };
 		3A44F4EC243E9F1E002B80F8 /* Level1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A44F4EA243E9F1E002B80F8 /* Level1.cpp */; };
 		3A44F4EF243EA1A7002B80F8 /* Level2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A44F4ED243EA1A7002B80F8 /* Level2.cpp */; };
-		3A44F4F5244526C0002B80F8 /* Level3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A44F4F3244526C0002B80F8 /* Level3.cpp */; };
-		3A44F4FA24467D5C002B80F8 /* font1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A44F4F924467D52002B80F8 /* font1.png */; };
-		3A44F4FD244685CA002B80F8 /* startPage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A44F4FB244685CA002B80F8 /* startPage.cpp */; };
+		3A44F5022446DF57002B80F8 /* Level3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A44F5002446DF57002B80F8 /* Level3.cpp */; };
+		3A44F5052446E06E002B80F8 /* Level0.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A44F5032446E06E002B80F8 /* Level0.cpp */; };
+		3A44F5082446E181002B80F8 /* font1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A44F5062446E14A002B80F8 /* font1.png */; };
 		3A970F27240DFD620068813B /* george_0.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A970F26240DFD570068813B /* george_0.png */; };
 		3A970F2A240E049B0068813B /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A970F28240E049B0068813B /* Entity.cpp */; };
-		3A970F2C2411CB510068813B /* ctg.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A970F2B2411CB4C0068813B /* ctg.png */; };
 		3A970F2E2411E12B0068813B /* platformPack_tile001.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A970F2D2411E1250068813B /* platformPack_tile001.png */; };
 		DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B522323DE3F007CECB1 /* main.cpp */; };
 		DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */; };
@@ -39,16 +41,23 @@
 			files = (
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
 				3A970F27240DFD620068813B /* george_0.png in CopyFiles */,
-				3A970F2C2411CB510068813B /* ctg.png in CopyFiles */,
+				3A06F6CE244ADCAC00772789 /* enemy2.png in CopyFiles */,
 				3A44F4E0243E92E7002B80F8 /* tileset.png in CopyFiles */,
+				3A44F5082446E181002B80F8 /* font1.png in CopyFiles */,
+				3A06F6C6244AD6ED00772789 /* crypto.mp3 in CopyFiles */,
+				3A06F6CA244AD88400772789 /* gameover.wav in CopyFiles */,
 				3A970F2E2411E12B0068813B /* platformPack_tile001.png in CopyFiles */,
-				3A44F4FA24467D5C002B80F8 /* font1.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A06F6C5244AD6DC00772789 /* crypto.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = crypto.mp3; sourceTree = "<group>"; };
+		3A06F6C9244AD88000772789 /* gameover.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameover.wav; sourceTree = "<group>"; };
+		3A06F6CB244ADC6600772789 /* enemy2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy2.png; sourceTree = "<group>"; };
+		3A06F6CC244ADC9B00772789 /* crypto.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = crypto.mp3; path = "../../../../school stuff/CS3113-master/Assets/Audio/crypto.mp3"; sourceTree = "<group>"; };
+		3A06F6CD244ADC9B00772789 /* gameover.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = gameover.wav; path = "../../../../school stuff/CS3113-master/Assets/Audio/gameover.wav"; sourceTree = "<group>"; };
 		3A44F4DF243E92D5002B80F8 /* tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileset.png; sourceTree = "<group>"; };
 		3A44F4E1243E9376002B80F8 /* Map.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
 		3A44F4E2243E9376002B80F8 /* Map.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
@@ -60,15 +69,14 @@
 		3A44F4EB243E9F1E002B80F8 /* Level1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Level1.h; sourceTree = "<group>"; };
 		3A44F4ED243EA1A7002B80F8 /* Level2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Level2.cpp; sourceTree = "<group>"; };
 		3A44F4EE243EA1A7002B80F8 /* Level2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Level2.h; sourceTree = "<group>"; };
-		3A44F4F3244526C0002B80F8 /* Level3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Level3.cpp; sourceTree = "<group>"; };
-		3A44F4F4244526C0002B80F8 /* Level3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Level3.h; sourceTree = "<group>"; };
-		3A44F4F924467D52002B80F8 /* font1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font1.png; sourceTree = "<group>"; };
-		3A44F4FB244685CA002B80F8 /* startPage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = startPage.cpp; sourceTree = "<group>"; };
-		3A44F4FC244685CA002B80F8 /* startPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = startPage.h; sourceTree = "<group>"; };
+		3A44F5002446DF57002B80F8 /* Level3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Level3.cpp; sourceTree = "<group>"; };
+		3A44F5012446DF57002B80F8 /* Level3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Level3.h; sourceTree = "<group>"; };
+		3A44F5032446E06E002B80F8 /* Level0.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Level0.cpp; sourceTree = "<group>"; };
+		3A44F5042446E06E002B80F8 /* Level0.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Level0.h; sourceTree = "<group>"; };
+		3A44F5062446E14A002B80F8 /* font1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font1.png; sourceTree = "<group>"; };
 		3A970F26240DFD570068813B /* george_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = george_0.png; sourceTree = "<group>"; };
 		3A970F28240E049B0068813B /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		3A970F29240E049B0068813B /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
-		3A970F2B2411CB4C0068813B /* ctg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ctg.png; path = "../../school stuff/CS3113-master/Assets/2D Sprites/ctg.png"; sourceTree = "<group>"; };
 		3A970F2D2411E1250068813B /* platformPack_tile001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = platformPack_tile001.png; sourceTree = "<group>"; };
 		DBDF1B4F2323DE3F007CECB1 /* SDLProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBDF1B522323DE3F007CECB1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -122,8 +130,12 @@
 			children = (
 				3A44F4DF243E92D5002B80F8 /* tileset.png */,
 				3A970F26240DFD570068813B /* george_0.png */,
-				3A970F2B2411CB4C0068813B /* ctg.png */,
-				3A44F4F924467D52002B80F8 /* font1.png */,
+				3A44F5062446E14A002B80F8 /* font1.png */,
+				3A06F6CB244ADC6600772789 /* enemy2.png */,
+				3A06F6C5244AD6DC00772789 /* crypto.mp3 */,
+				3A06F6C9244AD88000772789 /* gameover.wav */,
+				3A06F6CC244ADC9B00772789 /* crypto.mp3 */,
+				3A06F6CD244ADC9B00772789 /* gameover.wav */,
 				3A970F2D2411E1250068813B /* platformPack_tile001.png */,
 				DBDF1B5B2323DE8D007CECB1 /* glm */,
 				DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */,
@@ -143,10 +155,10 @@
 				3A44F4EB243E9F1E002B80F8 /* Level1.h */,
 				3A44F4ED243EA1A7002B80F8 /* Level2.cpp */,
 				3A44F4EE243EA1A7002B80F8 /* Level2.h */,
-				3A44F4F3244526C0002B80F8 /* Level3.cpp */,
-				3A44F4F4244526C0002B80F8 /* Level3.h */,
-				3A44F4FB244685CA002B80F8 /* startPage.cpp */,
-				3A44F4FC244685CA002B80F8 /* startPage.h */,
+				3A44F5002446DF57002B80F8 /* Level3.cpp */,
+				3A44F5012446DF57002B80F8 /* Level3.h */,
+				3A44F5032446E06E002B80F8 /* Level0.cpp */,
+				3A44F5042446E06E002B80F8 /* Level0.h */,
 			);
 			path = SDLProject;
 			sourceTree = "<group>";
@@ -222,13 +234,13 @@
 				3A44F4E9243E9EA8002B80F8 /* Scene.cpp in Sources */,
 				DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */,
 				3A970F2A240E049B0068813B /* Entity.cpp in Sources */,
-				3A44F4F5244526C0002B80F8 /* Level3.cpp in Sources */,
+				3A44F5022446DF57002B80F8 /* Level3.cpp in Sources */,
 				3A44F4E3243E9376002B80F8 /* Map.cpp in Sources */,
 				DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */,
 				3A44F4EF243EA1A7002B80F8 /* Level2.cpp in Sources */,
-				3A44F4FD244685CA002B80F8 /* startPage.cpp in Sources */,
 				3A44F4E6243E9C4B002B80F8 /* Util.cpp in Sources */,
 				3A44F4EC243E9F1E002B80F8 /* Level1.cpp in Sources */,
+				3A44F5052446E06E002B80F8 /* Level0.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

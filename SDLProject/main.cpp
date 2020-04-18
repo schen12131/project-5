@@ -10,6 +10,7 @@
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
+#include <SDL_mixer.h>
 
 #define FIXED_TIMESTEP 0.0166666f
 
@@ -20,10 +21,13 @@
 #include "Level1.h"
 #include "Level2.h"
 #include "Level3.h"
-#include "startPage.h"
+#include "Level0.h"
+
+Mix_Music *music;
+Mix_Chunk *scene;
 
 Scene *currentScene;
-Scene *sceneList[3];
+Scene *sceneList[4];
 
 void SwitchToScene(Scene *scene) {
     currentScene = scene;
@@ -52,6 +56,14 @@ void Initialize() {
     
     program.Load("shaders/vertex_textured.glsl", "shaders/fragment_textured.glsl");
     
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
+    
+    music = Mix_LoadMUS("crypto.mp3");
+    Mix_PlayMusic(music, -1);
+    Mix_VolumeMusic(MIX_MAX_VOLUME/4);
+    
+    scene = Mix_LoadWAV("gameover.wav");
+    
     viewMatrix = glm::mat4(1.0f);
     modelMatrix = glm::mat4(1.0f);
     projectionMatrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
@@ -66,16 +78,18 @@ void Initialize() {
     
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    //sceneList[0] = new startPage();
-    sceneList[0] = new Level1();
-    sceneList[1] = new Level2();
-    sceneList[2] = new Level3();
+    sceneList[0] = new Level0();
+    sceneList[1] = new Level1();
+    sceneList[2] = new Level2();
+    sceneList[3] = new Level3();
     SwitchToScene(sceneList[0]);
+    currentScene->lives= 3;
+
 }
 
 void ProcessInput() {
+    
     currentScene->state.player->movement = glm::vec3(0);
-
     
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -101,6 +115,11 @@ void ProcessInput() {
                             currentScene->state.player->jump = true;
                         }
                         break;
+                    case SDLK_RETURN:
+                        if (currentScene == sceneList[0]){
+                            SwitchToScene(sceneList[1]);
+                            break;
+                        }
                 }
                 break; // SDL_KEYDOWN
         }
@@ -117,7 +136,6 @@ void ProcessInput() {
         currentScene->state.player->animIndices = currentScene->state.player->animRight;
     }
     
-    
     if (glm::length(currentScene->state.player->movement) > 1.0f) {
         currentScene->state.player->movement = glm::normalize(currentScene->state.player->movement);
     }
@@ -126,6 +144,8 @@ void ProcessInput() {
 
 float lastTicks = 0;
 float accumulator = 0.0f;
+
+bool lastCollidedBottom = false;
 void Update() {
     float ticks = (float)SDL_GetTicks() / 1000.0f;
     float deltaTime = ticks - lastTicks;
@@ -138,6 +158,12 @@ void Update() {
         // Update. Notice it's FIXED_TIMESTEP. Not deltaTime
         currentScene->Update(FIXED_TIMESTEP);
         
+        program.SetLightPosition(currentScene->state.player->position);
+        if (lastCollidedBottom == false && currentScene->state.player->collidedBottom){
+            //effects->Start(SHAKE, 2.0f);
+        }
+        lastCollidedBottom = currentScene->state.player->collidedBottom;
+        
         deltaTime -= FIXED_TIMESTEP;
     }
     accumulator = deltaTime;
@@ -148,6 +174,7 @@ void Update() {
     } else {
         viewMatrix = glm::translate(viewMatrix, glm::vec3(-5, 3.75, 0));
     }
+
 }
 
 void Render() {
@@ -155,7 +182,10 @@ void Render() {
     
     program.SetViewMatrix(viewMatrix);
     
+    glUseProgram(program.programID);
+    
     currentScene->Render(&program);
+    
     
     SDL_GL_SwapWindow(displayWindow);
 }
@@ -169,12 +199,18 @@ int main(int argc, char* argv[]) {
     Initialize();
     
     while (gameIsRunning) {
+        
         ProcessInput();
         Update();
-        
-        if (currentScene->state.nextScene >= 0) SwitchToScene(sceneList[currentScene->state.nextScene]);
-        
+        int temp;
+        if (currentScene->state.nextScene >= 0){
+            temp = currentScene->state.player->lives;
+            SwitchToScene(sceneList[currentScene->state.nextScene]);
+            Mix_PlayChannel(-1, scene, 0);
+            currentScene->state.player->lives= temp;
+        }
         Render();
+        
     }
     
     Shutdown();

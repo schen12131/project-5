@@ -10,9 +10,9 @@ unsigned int level2_data[] =
     3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3,
-    3, 1, 1, 1, 1, 1, 1, 0, 3, 3, 3, 3, 3, 3,
-    3, 2, 2, 2, 2, 2, 2, 0, 3, 3, 3, 3, 3, 3,
+    3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    3, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 3, 1,
+    3, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 3, 2,
 };
 
 void Level2::Initialize() {
@@ -45,24 +45,59 @@ void Level2::Initialize() {
     state.player->jumpPower = 6.0f;
     
     state.enemies = new Entity[LEVEL2_ENEMY_COUNT];
-    GLuint enemyTextureID = Util::LoadTexture("ctg.png");
+    GLuint enemyTextureID = Util::LoadTexture("enemy2.png");
     
     state.enemies[0].entityType = ENEMY;
     state.enemies[0].aiType = WAITANDGO;
     state.enemies[0].aiState = IDLE;
     state.enemies[0].textureID = enemyTextureID;
-    state.enemies[0].position = glm::vec3(4, -2.25, 0);
+    state.enemies[0].position = glm::vec3(13, -5, 0);
     state.enemies[0].speed = 1;
     state.enemies[0].isActive = true;
+    
+    state.gameOver = new Entity[9];
+    float counter = 3.0f;
+    
+    GLuint fontTextureID = Util::LoadTexture("font1.png");
+    
+    for (int i = 0; i < 9; i++){
+        state.gameOver[i].textureID = fontTextureID;
+        state.gameOver[i].position = glm::vec3(counter, -2, 0);
+        state.gameOver[i].animCols = 16;
+        state.gameOver[i].animRows = 16;
+        state.gameOver[i].height = 0.3f;
+        state.gameOver[i].width = 0.3f;
+        state.gameOver[i].fail = new int[9] {71, 65, 77, 69, 9, 79, 86, 69, 82};
+        state.gameOver[i].index = i;
+        state.gameOver[i].isActive = false;
+        counter += 0.5f;
+    }
+    
+    for (int j = 0; j < 9; j++){
+        state.gameOver[j].Update(NULL, NULL, NULL, 0, state.map);
+    }
 }
 void Level2::Update(float deltaTime) {
     state.player->Update(deltaTime, state.player, state.enemies, LEVEL2_ENEMY_COUNT, state.map);
+    state.enemies[0].Update(deltaTime, state.player, NULL, 0, state.map);
     
     if (state.player->position.x >= 12){
-        state.nextScene = 2;
+        state.nextScene = 3;
+    }
+    
+    if (state.player->lives == 0){
+        state.player->isActive = false;
+        for ( int i = 0; i < 9; i++){
+            state.gameOver[i].isActive = true;
+            state.gameOver[i].Update(NULL, NULL, NULL, 0, state.map);
+        }
     }
 }
 void Level2::Render(ShaderProgram *program) {
     state.map->Render(program);
+    state.enemies[0].Render(program);
     state.player->Render(program);
+    for ( int i = 0; i < 9; i++){
+        state.gameOver[i].Render(program);
+    }
 }
